@@ -12,20 +12,19 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import nltk
 
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 # Load models and data
 movies = joblib.load('movies.pkl')
 transform_vectorizer = joblib.load('transform.pkl')
 svc_model = joblib.load('svc_model.pkl')
 
-# # Get the TMDB API key from environment variable
-# tmdb_api_key = os.getenv('TMDB_API_KEY')
+# Get the TMDB API key from environment variable
+tmdb_api_key = os.getenv('TMDB_API_KEY')
 
-# if not tmdb_api_key:
-#     raise ValueError('TMDB_API_KEY environment variable is not set')
-
-# TMDB API key
-tmdb_api_key = '613b9e66c1e1b3fee798437e9803e1b5'
+if not tmdb_api_key:
+    raise ValueError('TMDB_API_KEY environment variable is not set')
 
 
 def get_imdb_id(tmdb_id):
